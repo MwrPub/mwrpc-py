@@ -1,6 +1,6 @@
 <?php
 
-namespace Mwr;
+namespace Mwr\Client;
 
 class MwrClient
 {

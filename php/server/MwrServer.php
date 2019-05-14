@@ -1,6 +1,6 @@
 <?php
 
-namespace Mwr;
+namespace Mwr\Server;
 
 class MwrServer
 {
