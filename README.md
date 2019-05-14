@@ -9,13 +9,32 @@ Yet Another RPC Framework :D
 ## PHP Version
 
 > Server Side
+
+> Install
+
+Composer :
+
+```text
+{
+  ...
+  "require": {
+    ...
+    "mwr-wiki/method-working-remotely": "0.1.*"
+    ...
+  }
+  ...
+}
+```
+
 * index.php
 
 ```php
 <?php
+
+require "vendor/autoload.php";
+
 define('MWR_PATH', __DIR__ . '/');
 date_default_timezone_set('PRC');
-require('[PATH_TO_MWR]/MwrServer.php');
 
 use Mwr\Server\MwrServer;
 
@@ -35,6 +54,10 @@ class CalcMwr
 > Client Side
 
 ```php
+<?php
+
+require "vendor/autoload.php";
+
 use \Mwr\Client\MwrClient;
 
 echo (new MwrClient('calc'))->add($_REQUEST['a'], $_REQUEST['b']);
