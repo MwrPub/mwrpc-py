@@ -7,9 +7,6 @@ from wsgiref.simple_server import make_server
 
 
 class MwrClient:
-    __host__ = ''
-    __port__ = 0
-    __endpoint__ = ''
 
     def __init__(self, endpoint='mwr', host='localhost', port=6495):
         self.__host__ = host
@@ -22,8 +19,7 @@ class MwrClient:
             headers = {'Content-Type': "application/json", 'MWR_VER': "0.1.2"}
             data = json.JSONEncoder().encode({'param': list(args)})
             conn.request("POST", "/{0}/{1}".format(self.__endpoint__, item), data, headers)
-            res = conn.getresponse()
-            rep = res.read().decode('utf-8')
+            rep = conn.getresponse().read().decode('utf-8')
             response = json.JSONDecoder().decode(rep)
             if 'result' in response:
                 return response['result']

@@ -20,7 +20,6 @@ setup(
                  'Intended Audience :: Developers',
                  'License :: OSI Approved :: MIT License',
                  'Topic :: Internet :: WWW/HTTP :: HTTP Servers',
-                 'Topic :: Internet :: WWW/HTTP :: WSGI',
                  'Topic :: Software Development :: Libraries :: Application Frameworks',
                  'Programming Language :: Python :: 3',
                  'Programming Language :: Python :: 3.4',
