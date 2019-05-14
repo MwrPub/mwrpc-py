@@ -1,21 +1,24 @@
 <?php
 
+namespace Mwr;
+
 class MwrClient
 {
     private $url;
+    const MWR_VER = '0.1.0';
 
-    public function __construct($url = 'http://localhost/mwr')
+    public function __construct($endpoint = 'mwr', $host = 'localhost', $port = 6495, $isHttps = false)
     {
-        $this->url = $url;
+        $scheme = $isHttps ? 'https://' : 'http://';
+        $this->url = $scheme . $host . ':' . $port . '/' . $endpoint . '/';
     }
 
     public function __call($name, $arguments)
     {
-
-        $content = json_encode(['func' => $name, 'a' => $arguments[0], 'b' => $arguments[1]]);
-        $params = ['http' => ['method' => 'POST', 'header' => ['User-Agent: MineBlog', 'CONTENT_TYPE: application/json'], 'content' => $content]];
+        $content = json_encode(['param' => $arguments]);
+        $params = ['http' => ['method' => 'POST', 'header' => ['MWR_VER: ' . self::MWR_VER, 'CONTENT_TYPE: application/json'], 'content' => $content]];
         $ctx = stream_context_create($params);
-        $fp = @fopen($this->url, 'rb', false, $ctx);
+        $fp = @fopen($this->url . $name, 'rb', false, $ctx);
         if (!$fp) {
             die('Can\'t open');
         }
