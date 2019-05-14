@@ -41,8 +41,33 @@ echo (new MwrClient('calc'))->add($_REQUEST['a'], $_REQUEST['b']);
 
 ## Python Version
 
+> Install
+
+```shell
+pip install method_working_remotely
+```
+
+> Server Side 
+
+```python
+from method_working_remotely import MwrServer
+
+server = MwrServer()
+
+@server.func(endpoint='calc')
+def add(a, b):
+    return a + b
+
+if __name__ == '__main__':
+    server.run()
+```
+
 > Client Side
 
 ```python
+from method_working_remotely import MwrClient
 
+client = MwrClient(endpoint='calc')
+
+print(client.add(1,2))
 ```
