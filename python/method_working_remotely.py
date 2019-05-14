@@ -1,31 +1,35 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from urllib import request
+import http.client
 import json
 from wsgiref.simple_server import make_server
 
 
 class MwrClient:
+    __host__ = ''
+    __port__ = 0
+    __endpoint__ = ''
 
-    def __init__(self, endpoint='mwr', host='localhost', port=6495, is_https=False):
-        scheme = 'https://' if is_https else 'http://'
-        self.url = '{0}{1}:{2}/{3}/'.format(scheme, host, port, endpoint)
+    def __init__(self, endpoint='mwr', host='localhost', port=6495):
+        self.__host__ = host
+        self.__port__ = port
+        self.__endpoint__ = endpoint
 
     def __getattr__(self, item):
         def f(*args):
-            req = request.Request(self.url + item)
-            req.add_header('MWR_VER', '0.1.1')
-            req.add_header('CONTENT_TYPE', 'application/json')
+            conn = http.client.HTTPConnection(self.__host__, self.__port__)
+            headers = {'Content-Type': "application/json", 'MWR_VER': "0.1.2"}
             data = json.JSONEncoder().encode({'param': list(args)})
-            with request.urlopen(req, data=data.encode('utf-8')) as rf:
-                rep = rf.read().decode('utf-8')
-                response = json.JSONDecoder().decode(rep)
-                if 'result' in response:
-                    return response['result']
-                else:
-                    print(response['err'])
-                    return None
+            conn.request("POST", "/{0}/{1}".format(self.__endpoint__, item), data, headers)
+            res = conn.getresponse()
+            rep = res.read().decode('utf-8')
+            response = json.JSONDecoder().decode(rep)
+            if 'result' in response:
+                return response['result']
+            else:
+                print(response['err'])
+                return None
 
         return f
 
@@ -47,7 +51,7 @@ class MwrServer:
 
     def run(self):
         httpd = make_server(self.__host__, self.__port__, self.handler)
-        print("Method Working Remotely 0.1.1")
+        print("Method Working Remotely 0.1.2")
         print("Serving Mwr Server on port {0}...".format(self.__port__))
         print("Running on http://{0}:{1}/ (Press CTRL+C to quit)".format(self.__host__, self.__port__))
         httpd.serve_forever()

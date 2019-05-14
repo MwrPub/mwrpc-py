@@ -5,7 +5,7 @@ namespace Mwr\Client;
 class MwrClient
 {
     private $url;
-    const MWR_VER = '0.1.1';
+    const MWR_VER = '0.1.2';
 
     public function __construct($endpoint = 'mwr', $host = 'localhost', $port = 6495, $isHttps = false)
     {
