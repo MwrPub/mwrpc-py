@@ -1,5 +1,5 @@
 {
-  "name": "mwr-wiki/mwrpc",
+  "name": "mwr-wiki/method-working-remotely",
   "description": "Yet Another RPC Framework",
   "minimum-stability": "alpha",
   "license": "MIT",
