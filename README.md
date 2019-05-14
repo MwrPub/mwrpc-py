@@ -3,12 +3,10 @@
 Yet Another RPC Framework :D
 
 ![GitHub](https://img.shields.io/github/license/mwr-wiki/method-working-remotely.svg?color=blue&style=flat-square)
-![Packagist Version](https://img.shields.io/packagist/v/mwr-wiki/method-working-remotely.svg?color=orange&style=flat-square)
-![PyPI](https://img.shields.io/pypi/v/method-working-remotely.svg?color=orange&style=flat-square)
+[![Packagist Version](https://img.shields.io/packagist/v/mwr-wiki/method-working-remotely.svg?color=orange&style=flat-square)](https://packagist.org/packages/mwr-wiki/method-working-remotely)
+[![PyPI](https://img.shields.io/pypi/v/method-working-remotely.svg?color=orange&style=flat-square)](https://pypi.org/project/method-working-remotely/)
 
 ## PHP Version
-
-> Server Side
 
 > Install
 
@@ -25,6 +23,8 @@ Composer :
   ...
 }
 ```
+
+> Server Side
 
 * index.php
 
