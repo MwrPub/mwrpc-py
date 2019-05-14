@@ -46,11 +46,12 @@ class MwrServer:
         return decorate
 
     def run(self):
-        httpd = make_server(self.__host__, self.__port__, self.handler)
-        print("Method Working Remotely 0.1.3")
-        print("Serving Mwr Server on port {0}...".format(self.__port__))
-        print("Running on http://{0}:{1}/ (Press CTRL+C to quit)".format(self.__host__, self.__port__))
-        httpd.serve_forever()
+        h = make_server(self.__host__, self.__port__, self.handler)
+        t = '''MWR 0.1.3
+Serving MWR on {0}:{1}
+(Press CTRL+C to quit)'''
+        print(t.format(self.__host__, self.__port__))
+        h.serve_forever()
 
     def handler(self, environ, start_response):
         url_array = environ['PATH_INFO'].split('/')

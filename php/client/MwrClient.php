@@ -20,11 +20,11 @@ class MwrClient
         $ctx = stream_context_create($params);
         $fp = @fopen($this->url . $name, 'rb', false, $ctx);
         if (!$fp) {
-            die('Can\'t open');
+            die('Mwr Call Failed. Can\'t open endpoint');
         }
         $response = @stream_get_contents($fp);
         if ($response === false) {
-            die('Can\'t get content');
+            die('Mwr Call Failed. Can\'t get response content');
         }
         $json = json_decode($response, true);
         if (isset($json['result'])) {
