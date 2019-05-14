@@ -5,7 +5,7 @@ namespace Mwr\Client;
 class MwrClient
 {
     private $url;
-    const MWR_VER = '0.1.3';
+    const MWR_VER = '0.1.4';
 
     public function __construct($endpoint = 'mwr', $host = 'localhost', $port = 6495, $isHttps = false)
     {
@@ -28,7 +28,7 @@ class MwrClient
         }
         $json = json_decode($response, true);
         if (isset($json['result'])) {
-            return ['result'];
+            return $json['result'];
         } else {
             return null;
         }

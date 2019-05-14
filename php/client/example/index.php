@@ -4,4 +4,11 @@ require '../MwrClient.php';
 
 use Mwr\Client\MwrClient;
 
-echo (new MwrClient('calc'))->add($_REQUEST['a'], $_REQUEST['b']);
+$client = new MwrClient('calc');
+
+echo $client->add($_REQUEST['a'], $_REQUEST['b']);
+echo '<br>';
+echo $client->minus($_REQUEST['a'], $_REQUEST['b']);
+echo '<br>';
+echo $client->multiply($_REQUEST['a'], $_REQUEST['b']);
+echo '<br>';

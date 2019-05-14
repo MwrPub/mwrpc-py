@@ -16,7 +16,7 @@ class MwrClient:
     def __getattr__(self, item):
         def f(*args):
             conn = http.client.HTTPConnection(self.__host__, self.__port__)
-            headers = {'Content-Type': "application/json", 'MWR_VER': "0.1.3"}
+            headers = {'Content-Type': "application/json", 'MWR_VER': "0.1.4"}
             data = json.JSONEncoder().encode({'param': list(args)})
             conn.request("POST", "/{0}/{1}".format(self.__endpoint__, item), data, headers)
             rep = conn.getresponse().read().decode('utf-8')
@@ -47,7 +47,7 @@ class MwrServer:
 
     def run(self):
         h = make_server(self.__host__, self.__port__, self.handler)
-        t = '''MWR 0.1.3
+        t = '''MWR 0.1.4
 Serving MWR on {0}:{1}
 (Press CTRL+C to quit)'''
         print(t.format(self.__host__, self.__port__))
