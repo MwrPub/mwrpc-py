@@ -2,7 +2,7 @@
   "name": "mwr-wiki/mwrpc",
   "description": "Yet Another RPC Framework",
   "minimum-stability": "alpha",
-  "license": "MWR",
+  "license": "MIT",
   "authors": [
     {
       "name": "MWR Organization",
