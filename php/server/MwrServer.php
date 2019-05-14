@@ -23,6 +23,7 @@ class MwrServer
         $param = $request['param'];
         $class_name = $endpoint . 'Mwr';
         if (!class_exists($class_name)) {
+            header("Content-Type: application/json; charset=UTF-8");
             echo json_encode(['code' => -1, 'err' => 'endpoint not exists']);
             die();
         }
@@ -30,12 +31,15 @@ class MwrServer
             $dispatch = new $class_name();
             try {
                 $result = call_user_func_array([$dispatch, $func_name], $param);
+                header("Content-Type: application/json; charset=UTF-8");
                 echo json_encode(['code' => 0, 'result' => $result]);
             } catch (\ArgumentCountError $argumentCountError) {
+                header("Content-Type: application/json; charset=UTF-8");
                 echo json_encode(['code' => -3, 'err' => 'too few arguments']);
                 die();
             }
         } else {
+            header("Content-Type: application/json; charset=UTF-8");
             echo json_encode(['code' => -2, 'err' => 'method not exists']);
             die();
         }

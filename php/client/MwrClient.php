@@ -26,6 +26,11 @@ class MwrClient
         if ($response === false) {
             die('Can\'t get content');
         }
-        return json_decode($response, true)['result'];
+        $json = json_decode($response, true);
+        if (isset($json['result'])) {
+            return ['result'];
+        } else {
+            return null;
+        }
     }
 }
