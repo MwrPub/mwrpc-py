@@ -2,10 +2,10 @@
 
 Yet Another RPC Framework :D
 
-![License](https://img.shields.io/github/license/mwr-wiki/method-working-remotely.svg?color=blue&style=for-the-badge)
-![GitHub release](https://img.shields.io/github/release/mwr-wiki/method-working-remotely.svg?logo=github&style=for-the-badge)
-[![Composer](https://img.shields.io/github/release/mwr-wiki/method-working-remotely.svg?color=777bb3&label=composer&logo=php&style=for-the-badge)](https://packagist.org/packages/mwr-wiki/method-working-remotely)
-[![PyPI](https://img.shields.io/pypi/v/method-working-remotely.svg?color=3776AB&logo=python&logoColor=white&style=for-the-badge)](https://pypi.org/project/method-working-remotely/)
+[![License](https://img.shields.io/github/license/mwr-wiki/method-working-remotely.svg?color=blue&style=flat-square)](https://github.com/mwr-wiki/method-working-remotely/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/mwr-wiki/method-working-remotely.svg?logo=github&style=flat-square)](https://github.com/mwr-wiki/method-working-remotely/releases)
+[![Composer](https://img.shields.io/github/release/mwr-wiki/method-working-remotely.svg?color=777bb3&label=composer&logo=php&style=flat-square)](https://packagist.org/packages/mwr-wiki/method-working-remotely)
+[![PyPI](https://img.shields.io/pypi/v/method-working-remotely.svg?color=3776AB&logo=python&logoColor=white&style=flat-square)](https://pypi.org/project/method-working-remotely/)
 
 ## PHP Version
 
