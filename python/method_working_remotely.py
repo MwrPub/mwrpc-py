@@ -16,7 +16,7 @@ class MwrClient:
     def __getattr__(self, item):
         def f(*args):
             conn = http.client.HTTPConnection(self.__host__, self.__port__)
-            headers = {'Content-Type': "application/json", 'MWR_VER': "0.1.2"}
+            headers = {'Content-Type': "application/json", 'MWR_VER': "0.1.3"}
             data = json.JSONEncoder().encode({'param': list(args)})
             conn.request("POST", "/{0}/{1}".format(self.__endpoint__, item), data, headers)
             rep = conn.getresponse().read().decode('utf-8')
@@ -47,7 +47,7 @@ class MwrServer:
 
     def run(self):
         httpd = make_server(self.__host__, self.__port__, self.handler)
-        print("Method Working Remotely 0.1.2")
+        print("Method Working Remotely 0.1.3")
         print("Serving Mwr Server on port {0}...".format(self.__port__))
         print("Running on http://{0}:{1}/ (Press CTRL+C to quit)".format(self.__host__, self.__port__))
         httpd.serve_forever()
