@@ -11,7 +11,9 @@ Yet Another RPC Framework :D
 ![Packagist](https://img.shields.io/packagist/dt/mwr-wiki/method-working-remotely.svg?logo=php&style=flat-square)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/method-working-remotely.svg?logo=python&logoColor=white&style=flat-square)
 
-![MWRNB](https://img.shields.io/badge/MWR-Freaking_Awesome-blue.svg?style=flat-square) Before use it.You must admit that **MaWenRui is freaking awesome.** 
+![MWRNB](https://img.shields.io/badge/MWR-Freaking_Awesome-ff69b4.svg?style=flat-square)
+
+Before use it.You must admit that **MaWenRui is freaking awesome.** 
 
 ## PHP Version
 
