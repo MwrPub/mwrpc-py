@@ -21,7 +21,7 @@ func (ms *MwrServer) Run() {
 	host := fmt.Sprintf("%s:%d", ms.Host, ms.Port)
 	done := make(chan bool)
 	go func() {
-		fmt.Printf("MWR 0.1.4\nServing MWR on %s:%d\n(Press CTRL+C to quit)\n", ms.Host, ms.Port)
+		fmt.Printf("MWR 0.1.4\nServing MWR on http://%s\n(Press CTRL+C to quit)\n", host)
 		err := http.ListenAndServe(host, nil)
 		if err != nil {
 			log.Fatal("Error", err)
