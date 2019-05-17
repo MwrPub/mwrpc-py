@@ -7,9 +7,9 @@ import (
 )
 
 type MwrServer struct {
-	host     string
-	port     int
-	endpoint string
+	Host     string
+	Port     int
+	Endpoint string
 }
 
 func testMwrServer(w http.ResponseWriter, r *http.Request) {
@@ -18,10 +18,10 @@ func testMwrServer(w http.ResponseWriter, r *http.Request) {
 
 func (ms *MwrServer) Run() {
 	http.HandleFunc("/", testMwrServer)
-	host := fmt.Sprintf("%s:%d", ms.host, ms.port)
+	host := fmt.Sprintf("%s:%d", ms.Host, ms.Port)
 	done := make(chan bool)
 	go func() {
-		fmt.Printf("MWR 0.1.4\nServing MWR on %s:%d\n(Press CTRL+C to quit)\n", ms.host, ms.port)
+		fmt.Printf("MWR 0.1.4\nServing MWR on %s:%d\n(Press CTRL+C to quit)\n", ms.Host, ms.Port)
 		err := http.ListenAndServe(host, nil)
 		if err != nil {
 			log.Fatal("Error", err)
