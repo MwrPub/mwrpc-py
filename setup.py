@@ -4,16 +4,16 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='method_working_remotely',
+    name='mwrpc',
     version='0.1.4',
     description='Yet Another RPC Framework.',
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
     author='MWR Organization',
-    author_email='mwr@mwr.wiki',
-    url='https://github.com/mwr-wiki/method-working-remotely',
-    py_modules=['method_working_remotely'],
-    scripts=['method_working_remotely.py'],
+    author_email='mwr@mwr.pub',
+    url='https://github.com/MwrPub/mwrpc-py',
+    py_modules=['mwrpc'],
+    scripts=['mwrpc.py'],
     license='MIT',
     platforms='any',
     classifiers=['Operating System :: OS Independent',
