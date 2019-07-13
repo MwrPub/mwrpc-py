@@ -2,6 +2,8 @@
 
 Yet Another RPC Framework :D
 
+[Proposal](https://github.com/MwrPub/method-working-remotely) 
+
 [![License](https://img.shields.io/github/license/mwrpub/mwrpc-py.svg?color=blue&style=flat-square)](https://github.com/mwrpub/mwrpc-py/blob/master/LICENSE)
 [![PyPI](https://img.shields.io/pypi/v/mwrpc.svg?color=3776AB&logo=pypi&logoColor=white&style=flat-square)](https://pypi.org/project/mwrpc/)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/mwrpc.svg?logo=python&logoColor=white&style=flat-square)
