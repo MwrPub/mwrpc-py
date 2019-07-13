@@ -7,10 +7,11 @@
 ._*
 *.*~
 
+test/
 dist/
 build/
 MANIFEST
-method_working_remotely.egg-info/
+mwrpc.egg-info/
 
 .idea/
 venv/

@@ -31,11 +31,14 @@ class MwrClient:
 
 
 class MwrServer:
+    __allowed_origin__ = []
     __rules__ = []
 
-    def __init__(self, host='localhost', port=6495):
+    def __init__(self, host='localhost', port=6495, allowed_origin=None):
         self.__host__ = host
         self.__port__ = port
+        if allowed_origin is not None:
+            self.__allowed_origin__ = allowed_origin
 
     def func(self, endpoint='mwr', alias=None):
         def decorate(f):
@@ -47,7 +50,7 @@ class MwrServer:
 
     def run(self):
         h = make_server(self.__host__, self.__port__, self.handler)
-        t = '''MWR 0.1.4
+        t = '''MWR 0.1.5
 Serving MWR on {0}:{1}
 (Press CTRL+C to quit)'''
         print(t.format(self.__host__, self.__port__))
@@ -55,7 +58,18 @@ Serving MWR on {0}:{1}
 
     def handler(self, environ, start_response):
         url_array = environ['PATH_INFO'].split('/')
-        start_response('200 OK', [('Content-Type', 'application/json')])
+        if len(self.__allowed_origin__) == 0:
+            allowed_origin = '*'
+        elif environ['HTTP_ORIGIN'] in self.__allowed_origin__:
+            allowed_origin = environ['HTTP_ORIGIN']
+        else:
+            allowed_origin = ''
+        start_response('200 OK', [
+            ('Content-Type', 'application/json'),
+            ('Access-Control-Allow-Origin', allowed_origin),
+            ('Access-Control-Allow-Methods', '*'),
+            ("Access-Control-Allow-Headers", "Content-Type"),
+        ])
         for rule in self.__rules__:
             if rule['endpoint'] == url_array[1] and rule['name'] == url_array[2]:
                 try:
@@ -63,9 +77,13 @@ Serving MWR on {0}:{1}
                 except ValueError:
                     content_length = 0
                 request_body = environ['wsgi.input'].read(content_length)
-                request_info = json.JSONDecoder().decode(request_body.decode('utf-8'))
-                args = request_info['param']
-                result = rule['func'](*args)
-                resp = json.JSONEncoder().encode({'result': result})
-                return [resp.encode('utf-8')]
+                try:
+                    request_info = json.JSONDecoder().decode(request_body.decode('utf-8'))
+                    args = request_info['param']
+                    result = rule['func'](*args)
+                    resp = json.JSONEncoder().encode({'result': result})
+                    return [resp.encode('utf-8')]
+                except Exception:
+                    return [''.encode('utf-8')]
+
         return ['{"code":-1,"err":"method not exists"}'.encode('utf-8')]
