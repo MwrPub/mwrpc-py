@@ -16,7 +16,7 @@ class MwrClient:
     def __getattr__(self, item):
         def f(*args):
             conn = http.client.HTTPConnection(self.__host__, self.__port__)
-            headers = {'Content-Type': "application/json", 'MWR_VER': "0.1.4"}
+            headers = {'Content-Type': "application/json", 'MWR_VER': "0.1.6"}
             data = json.JSONEncoder().encode({'param': list(args)})
             conn.request("POST", "/{0}/{1}".format(self.__endpoint__, item), data, headers)
             rep = conn.getresponse().read().decode('utf-8')
@@ -50,7 +50,7 @@ class MwrServer:
 
     def run(self):
         h = make_server(self.__host__, self.__port__, self.handler)
-        t = '''MWR 0.1.5
+        t = '''MWR 0.1.6
 Serving MWR on {0}:{1}
 (Press CTRL+C to quit)'''
         print(t.format(self.__host__, self.__port__))
@@ -68,7 +68,7 @@ Serving MWR on {0}:{1}
             ('Content-Type', 'application/json'),
             ('Access-Control-Allow-Origin', allowed_origin),
             ('Access-Control-Allow-Methods', '*'),
-            ("Access-Control-Allow-Headers", "Content-Type"),
+            ("Access-Control-Allow-Headers", "Content-Type,Mwr-Ver"),
         ])
         for rule in self.__rules__:
             if rule['endpoint'] == url_array[1] and rule['name'] == url_array[2]:
@@ -76,7 +76,10 @@ Serving MWR on {0}:{1}
                     content_length = int(environ['CONTENT_LENGTH'])
                 except ValueError:
                     content_length = 0
-                request_body = environ['wsgi.input'].read(content_length)
+                if content_length > 0:
+                    request_body = environ['wsgi.input'].read(content_length)
+                else:
+                    request_body = b'{"param":[]}'
                 try:
                     request_info = json.JSONDecoder().decode(request_body.decode('utf-8'))
                     args = request_info['param']
