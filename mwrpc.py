@@ -16,7 +16,7 @@ class MwrClient:
     def __getattr__(self, item):
         def f(*args):
             conn = http.client.HTTPConnection(self.__host__, self.__port__)
-            headers = {'Content-Type': "application/json", 'MWR_VER': "0.1.6"}
+            headers = {'Content-Type': "application/json", 'MWR_VER': "0.1.7"}
             data = json.JSONEncoder().encode({'param': list(args)})
             conn.request("POST", "/{0}/{1}".format(self.__endpoint__, item), data, headers)
             rep = conn.getresponse().read().decode('utf-8')
@@ -50,7 +50,7 @@ class MwrServer:
 
     def run(self):
         h = make_server(self.__host__, self.__port__, self.handler)
-        t = '''MWR 0.1.6
+        t = '''MWR 0.1.7
 Serving MWR on {0}:{1}
 (Press CTRL+C to quit)'''
         print(t.format(self.__host__, self.__port__))
@@ -64,6 +64,9 @@ Serving MWR on {0}:{1}
             allowed_origin = environ['HTTP_ORIGIN']
         else:
             allowed_origin = ''
+        if url_array[1] == '':
+            start_response('200 OK', [('Content-Type', 'text/plain'), ])
+            return ['MwrServer is running.'.encode('utf-8')]
         start_response('200 OK', [
             ('Content-Type', 'application/json'),
             ('Access-Control-Allow-Origin', allowed_origin),
